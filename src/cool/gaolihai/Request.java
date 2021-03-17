@@ -16,12 +16,12 @@ public class Request {
             String[] requestLine =  new BufferedReader(new InputStreamReader(inputStream)).readLine().split(" ");
             if (requestLine.length == 3 && requestLine[2].equals("HTTP/1.1")) {
                 this.method = requestLine[0];
-                String allUrl = requestLine[1];
-                if (allUrl.contains("?")) {
-                    this.url = allUrl.substring(0, allUrl.indexOf("?"));
-                    this.params = allUrl.substring(allUrl.indexOf("?") + 1);
+                String fullUrl = requestLine[1];
+                if (fullUrl.contains("?")) {
+                    this.url = fullUrl.substring(0, fullUrl.indexOf("?"));
+                    this.params = fullUrl.substring(fullUrl.indexOf("?") + 1);
                 } else {
-                    this.url = allUrl;
+                    this.url = fullUrl;
                 }
             }
         } catch (IOException e) {
