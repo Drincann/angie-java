@@ -13,7 +13,14 @@ public class Request {
 
     public Request(InputStream inputStream){
         try {
-            String[] requestLine =  new BufferedReader(new InputStreamReader(inputStream)).readLine().split(" ");
+            String requestLineStr =  new BufferedReader(new InputStreamReader(inputStream)).readLine();
+            if(requestLineStr == null) {
+                this.url = "";
+                this.params = "";
+                this.method = "";
+                return;
+            }
+            String[] requestLine = requestLineStr.split(" ");
             if (requestLine.length == 3 && requestLine[2].equals("HTTP/1.1")) {
                 this.method = requestLine[0];
                 String fullUrl = requestLine[1];
